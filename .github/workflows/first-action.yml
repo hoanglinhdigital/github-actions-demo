@@ -8,5 +8,9 @@ jobs:
         run: echo "Hello World!"
       - name: Print goodbye
         run: echo "Done - bye!"
-      - name: Terraform
-        run: terraform
+      - name: Print
+        run: pwd
+      - name: whoami
+        run: whoami
+      - name: Access local files
+        run: ls /Users/ty
