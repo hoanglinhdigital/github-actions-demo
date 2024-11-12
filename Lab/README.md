@@ -23,30 +23,32 @@ Before deploying any application, we set up an environment in both GitHub and AW
 
 To host the code to be deployed, let’s create a repository named `github-actions-ec2` using the GitHub GUI:
 
+![](assets/2024-11-13-00-59-22-image.png)
+
 ```bash
-$ git clone https://github.com/<username>/github-actions-ec2.git
+git clone https://github.com/<username>/github-actions-ec2.git
 ```
 
 Create a `.github/workflows` directory:
 
 ```bash
-$ cd github-actions-ec2
-$ mkdir -p .github/workflows
+cd github-actions-ec2
+mkdir -p .github/workflows
 ```
 
 Create a `deploy.yml` file:
 
 ```bash
-$ touch .github/workflows/deploy.yml
+touch .github/workflows/deploy.yml
 ```
 
 Set up a simple Node.js-Express application:
 
 ```bash
-$ mkdir -p github-actions-ec2/simple-web-server/
-$ cd simple-web-server
-$ npm init -y
-$ npm install express
+mkdir -p simple-web-server/
+cd simple-web-server
+npm init -y
+npm install express
 ```
 
 Example `server.js` content:
@@ -97,20 +99,28 @@ simple-web-server/node_modules/
 Run the server locally:
 
 ```bash
-$ npm start
+npm start
 ```
 
 Commit and push changes:
 
 ```bash
-$ git add .
-$ git commit -m "NodeJS-Express Application"
-$ git push
+git add .
+git commit -m "NodeJS-Express Application"
+git push
 ```
 
 ### 2.2. AWS Setup
 
 Set up an AWS EC2 instance named `github-actions-ec2-instance`, select Ubuntu AMI, use `t2-micro` instance type, and create a key pair for SSH access. Modify security group for SSH and TCP traffic on ports 22 and 3000. Launch the instance and confirm its running status.
+
+![Screenshot 2024-11-13 at 01.09.56.png](assets/e8e72b1c816a099f4e7b3e81c5d52fc8dfa01d74.png)
+
+![](assets/2024-11-13-01-10-36-image.png)
+
+![](assets/2024-11-13-01-09-20-image.png)
+
+![](assets/2024-11-13-02-06-05-image.png)
 
 ---
 
@@ -118,9 +128,25 @@ Set up an AWS EC2 instance named `github-actions-ec2-instance`, select Ubuntu AM
 
 Create a continuous deployment pipeline using GitHub Actions and SSH.
 
+![](assets/c45ac548eafc493b3a891b9e72cc0ed74078a56d.png)
+
+![](assets/2024-11-13-01-15-06-image.png)
+
 ### 3.1. Secret Variables
 
 Store secrets like the EC2 instance's hostname, username, and private key as GitHub secrets.
+
+![](assets/2024-11-13-01-59-24-image.png)
+
+
+
+![](assets/2024-11-13-02-00-09-image.png)
+
+![](assets/2024-11-13-02-00-47-image.png)
+
+![](assets/2024-11-13-02-01-17-image.png)
+
+![](assets/2024-11-13-02-01-32-image.png)
 
 ### 3.2. Script Setup
 
@@ -138,7 +164,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Deploy to EC2
       env:
         PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
@@ -191,14 +217,16 @@ jobs:
 Push the changes:
 
 ```bash
-$ git add .
-$ git commit -m "Deploy Node.js application to EC2"
-$ git push
+git add .
+git commit -m "Deploy Node.js application to EC2"
+git push
 ```
 
 ### 3.3. Testing the Deployment
 
 Use curl or browser to test deployment on EC2 instance's IP address.
+
+![](assets/2024-11-13-02-17-37-image.png)
 
 ---
 
@@ -267,9 +295,9 @@ jobs:
 Push the workflow:
 
 ```bash
-$ git add .
-$ git commit -m "Deploy to EC2 using easingthemes/ssh-deploy"
-$ git push
+git add .
+git commit -m "Deploy to EC2 using easingthemes/ssh-deploy"
+git push
 ```
 
 ### 4.3. Testing the Deployment
