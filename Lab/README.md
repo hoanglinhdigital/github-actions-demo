@@ -138,11 +138,15 @@ Store secrets like the EC2 instance's hostname, username, and private key as Git
 
 ![](assets/2024-11-13-01-59-24-image.png)
 
-
+First, **let’s store the username as *EC2_USER***:
 
 ![](assets/2024-11-13-02-00-09-image.png)
 
+After that, **we store the hostname as *EC2_HOST***:
+
 ![](assets/2024-11-13-02-00-47-image.png)
+
+Then, **we copy the content of the *github-ec2-instance-key.pem* downloaded earlier and store it as *EC2_PRIVATE_KEY***:
 
 ![](assets/2024-11-13-02-01-17-image.png)
 
@@ -242,6 +246,21 @@ Understand configuration variables for deployment via rsync over SSH.
 
 Store variables as GitHub secrets, update `deploy.yml` with easingthemes/ssh-deploy action:
 
+- *SSH_PRIVATE_KEY*: server private key
+- *REMOTE_HOST*: server public DNS name
+- *REMOTE_USER*: server username
+- *REMOTE_TARGET*: *~/simple-web-server*
+
+![](assets/2024-11-13-22-13-27-image.png)
+
+![](assets/2024-11-13-22-14-01-image.png)
+
+![](assets/2024-11-13-22-14-36-image.png)
+
+![](assets/2024-11-13-22-15-53-image.png)
+
+![](assets/2024-11-13-22-16-50-image.png)
+
 ```yaml
 name: Node CI
 
@@ -303,6 +322,12 @@ git push
 ### 4.3. Testing the Deployment
 
 Verify deployment using the instance's IP address in a web browser or curl command.
+
+![](assets/2024-11-13-22-28-35-image.png)
+
+![](assets/2024-11-13-22-28-52-image.png)
+
+![](assets/2024-11-13-22-20-15-image.png)
 
 ---
 
