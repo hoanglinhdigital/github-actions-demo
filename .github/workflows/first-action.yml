@@ -12,5 +12,3 @@ jobs:
         run: pwd
       - name: whoami
         run: whoami
-      - name: Access local files
-        run: ls /Users/ty
